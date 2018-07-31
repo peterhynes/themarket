@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import GroupAdmin
 from .models import GuestEmail
 from . forms import UserAdminCreationForm, UserAdminChangeForm
 from django.contrib.auth.models import Group
@@ -30,8 +31,7 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-admin.site.register(User, UserAdmin)
-
+admin.site.register(User, UserAdmin,)
 
 class GuestEmailAdmin(admin.ModelAdmin):
     search_fields = ['email']
@@ -39,6 +39,3 @@ class GuestEmailAdmin(admin.ModelAdmin):
         model = GuestEmail
 
 admin.site.register(GuestEmail, GuestEmailAdmin)
-
-# Remove Group Model from admin. We're not using it.
-admin.site.unregister(Group)

@@ -1,11 +1,20 @@
 from django.contrib.auth import authenticate, login, get_user_model
-from django.views.generic import CreateView, FormView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, FormView, DetailView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils.http import is_safe_url
 
 from .models import GuestEmail, User
 from .forms import LoginForm, RegisterForm, GuestForm, CustomerCreationForm, RetailerCreationForm
+
+
+class AccountHomeView(LoginRequiredMixin, DetailView):
+    template_name = 'accounts/home.html'
+    def get_object(self):
+        return self.request.user
+
 
 class RetailerSignUpView(CreateView):
     model = User

@@ -1,17 +1,21 @@
 from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from products.models import Product
 
 from .forms import ContactForm
 
 def home_page(request):
+    queryset = Product.objects.all()
     context = {
         "title":"Home page",
         "content":"welcome to the home page",
+        'object_list': queryset,
     }
     if request.user.is_authenticated:
         context["logged_in_content"] = "Logged in content"
     return render(request, "home_page.html", context)
+
 
 def about_page(request):
     context = {

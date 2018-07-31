@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group, PermissionsMixin, User
 
 from .models import User
 
@@ -45,12 +46,14 @@ class RetailerCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-        user = super(UserAdminCreationForm, self).save(commit=False)
+        user = super(RetailerCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_retailer = True
+        user.retailer = True
+        user.staff = True
         if commit:
             user.save()
         return user
+
 
 
 class CustomerCreationForm(forms.ModelForm):
@@ -69,9 +72,9 @@ class CustomerCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-        user = super(UserAdminCreationForm, self).save(commit=False)
+        user = super(CustomerCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_customer = True
+        user.customer = True
         if commit:
             user.save()
         return user
