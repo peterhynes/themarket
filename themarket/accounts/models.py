@@ -1,5 +1,6 @@
-from products.models import Product
 from django.db import models
+from products.models import Product
+#from django_tenants.models import TenantMixin, DomainMixin
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager
 )
@@ -37,7 +38,7 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser):
-    user_products = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
+    #user_products = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -88,6 +89,9 @@ class User(AbstractBaseUser):
     @property
     def is_customer(self):
         return self.customer
+
+# class Domain(DomainMixin):
+#     pass
 
 
 class GuestEmail(models.Model):

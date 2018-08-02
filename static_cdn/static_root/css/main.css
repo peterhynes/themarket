@@ -1,3 +1,31 @@
 body {
     color: #cccccc
 }
+
+/* css for home page */
+.hero-block {
+    background:linear-gradient(0deg,rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(/static_my_local_static/css/urban-438393_1280.jpg); /* Back ground image and Black background with 0.5 opacity */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    top: 0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-size:cover;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 2.5em;
+    line-height: 72px;
+    margin: 0 0 70px;
+}

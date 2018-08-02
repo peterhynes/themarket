@@ -52,6 +52,7 @@ class RetailerCreationForm(forms.ModelForm):
         user.staff = True
         if commit:
             user.save()
+            auto_create_schema = True  # default true, schema will be automatically created and synced when it is saved
         return user
 
 
