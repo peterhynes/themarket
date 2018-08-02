@@ -52,6 +52,7 @@ class User(AbstractBaseUser):
     rbn = models.IntegerField(null=True)
     business_type = models.CharField(max_length=255, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    #schema_name = models.CharField(max_length=255, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -63,6 +64,9 @@ class User(AbstractBaseUser):
 
     def get_full_name(self):
         return self.email
+
+    def get_business_name(self):
+        return self.business_name
 
     def get_short_name(self):
         return self.email
